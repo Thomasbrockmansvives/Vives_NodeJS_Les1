@@ -1,18 +1,18 @@
-// readline = node module
-
-// IMPORTS
 const readLine = require("readline/promises");
-// hernoemingen
 const { stdin: input, stdout: output } = require("node:process");
 
-function isValidNumber(response){
-   const number = Number(response);
-   if(response !== '' && Number.isInteger(number) && number > 19000000 && number < 30000000){
-      return true;
-   }
-   else {
-      return false;
-   }
+function isValidNumber(response) {
+  const number = Number(response);
+  if (
+    response !== "" &&
+    Number.isInteger(number) &&
+    number > 19000000 &&
+    number < 30000000
+  ) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 function assignGroup(birthdate) {
@@ -20,27 +20,22 @@ function assignGroup(birthdate) {
   console.log("Je bent toegewezen aan groep " + group);
 }
 
-async function askBirthdate(){
-   const rl = readLine.createInterface({ input, output });
+async function askBirthdate() {
+  const rl = readLine.createInterface({ input, output });
 
-   try {
+  try {
+    const response = (
+      await rl.question("Geef je geboortedatum in (JJJJMMDD): ")
+    ).trim();
 
-      const response = (
-        await rl.question("Geef je geboortedatum in (JJJJMMDD): ")
-      ).trim();
-
-      if(isValidNumber(response)){
-         assignGroup(response);
-      }
-      else {
-         console.log("Dat is geen geldige geboortedatum");
-      }
-   } finally {
-      rl.close();
-   }
+    if (isValidNumber(response)) {
+      assignGroup(response);
+    } else {
+      console.log("Dat is geen geldige geboortedatum");
+    }
+  } finally {
+    rl.close();
+  }
 }
 
 askBirthdate();
-
-
-
