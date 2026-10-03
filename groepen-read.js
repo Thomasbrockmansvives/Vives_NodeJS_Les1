@@ -7,7 +7,7 @@ const { stdin: input, stdout: output } = require("node:process");
 
 function isValidNumber(response){
    const number = Number(response);
-   if(response !== '' && Number.isInteger(number)){
+   if(response !== '' && Number.isInteger(number) && number > 0){
       return number;
    }
    else {
