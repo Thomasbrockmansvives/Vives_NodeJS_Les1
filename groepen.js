@@ -1,5 +1,6 @@
 function assignGroup(birthdate) {
-  console.log(birthdate);
+  group = (birthdate % 7) + 1;
+  return group;
 }
 
-console.log(assignGroup(19842206));
+console.log("Je bent toegewezen aan groep " + assignGroup(20201010));
