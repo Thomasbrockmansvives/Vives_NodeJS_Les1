@@ -5,13 +5,39 @@ const readLine = require("readline/promises");
 // hernoemingen
 const { stdin: input, stdout: output } = require("node:process");
 
-function isValidDate(inputtext){
-   
+function isValidNumber(response){
+   const number = Number(response);
+   if(response !== '' && Number.isInteger(number)){
+      return number;
+   }
+   else {
+      return 0;
+   }
 }
 
 function assignGroup(birthdate) {
-  group = (birthdate % 7) + 1;
-  return group;
+  const group = (birthdate % 7) + 1;
+  console.log("Je bent toegewezen aan groep " + group);
 }
 
-console.log("Je bent toegewezen aan groep " + assignGroup(20201010));
+async function askBirthdate(){
+   
+   const rl = readLine.createInterface({ input, output});
+   const response = (await rl.question('Geef je geboortedatum in (JJJJMMDD): ')).trim();
+
+   try {
+      if(isValidNumber(response)){
+         assignGroup(response);
+      }
+      else {
+         console.log("Dat is geen geldige geboortedatum");
+      }
+   } finally {
+      rl.close();
+   }
+}
+
+askBirthdate();
+
+
+
