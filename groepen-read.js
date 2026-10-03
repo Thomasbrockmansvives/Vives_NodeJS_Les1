@@ -7,11 +7,11 @@ const { stdin: input, stdout: output } = require("node:process");
 
 function isValidNumber(response){
    const number = Number(response);
-   if(response !== '' && Number.isInteger(number) && number > 0){
-      return number;
+   if(response !== '' && Number.isInteger(number) && number > 19000000 && number < 30000000){
+      return true;
    }
    else {
-      return 0;
+      return false;
    }
 }
 
@@ -21,11 +21,14 @@ function assignGroup(birthdate) {
 }
 
 async function askBirthdate(){
-   
-   const rl = readLine.createInterface({ input, output});
-   const response = (await rl.question('Geef je geboortedatum in (JJJJMMDD): ')).trim();
+   const rl = readLine.createInterface({ input, output });
 
    try {
+
+      const response = (
+        await rl.question("Geef je geboortedatum in (JJJJMMDD): ")
+      ).trim();
+
       if(isValidNumber(response)){
          assignGroup(response);
       }
